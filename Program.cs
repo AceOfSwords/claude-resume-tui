@@ -32,7 +32,8 @@ for (int i = 0; i < args.Length; i++)
                 index: %LOCALAPPDATA%\ccr
                 """);
             return 0;
-        default: queryParts.Add(args[i]); break;
+        // The shell already removed the quotes from "rate limit"; put them back so it stays a phrase.
+        default: queryParts.Add(args[i].Contains(' ') ? $"\"{args[i]}\"" : args[i]); break;
     }
 }
 

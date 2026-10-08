@@ -2,6 +2,14 @@
 
 Unofficial terminal UI for finding and resuming Claude Code sessions: full-text search across all your projects, then one key to jump back in.
 
+**1. Search for anything you remember** (a project, a title, something you or Claude said):
+
+```powershell
+PS C:\> ccr webhook retry
+```
+
+**2. Pick the session:**
+
 ```
  > webhook retry                                                      4/83
 ──────────────────────────────────────────┬────────────────────────────────────────
@@ -21,6 +29,24 @@ Unofficial terminal UI for finding and resuming Claude Code sessions: full-text 
 ──────────────────────────────────────────┴────────────────────────────────────────
  ↑↓ move   enter resume   ^Y copy   F2 settings   F1 help   esc clear
 ```
+
+**3. Press Enter.** `ccr` closes and types the resume command into your shell, so you're back in the conversation, in the right folder:
+
+```powershell
+PS C:\> cd 'D:\src\billing'; claude --resume 3f2a9c1e-5b7d-4e08-9a61-c4d2e8b07f13
+```
+
+### At a glance
+
+```powershell
+ccr                        # browse every session, newest first
+ccr billing                # a project, a title, or anything said in a session
+ccr "rate limit" -test     # an exact phrase, leaving out sessions that mention "test"
+ccr p:api after:7d         # only the api project, active in the last 7 days
+ccr -p webhook             # print matches as plain text instead of opening the browser
+```
+
+Inside Claude Code, `!ccr webhook` prints the matching sessions with their IDs right in the conversation.
 
 `/resume` only shows sessions for the folder you're in, and you have to know roughly what you're looking for. `ccr` searches every conversation you've had in any project, shows you where and when it happened, and puts you back in that session in the right folder.
 
